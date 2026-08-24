@@ -21,10 +21,12 @@ jobs:
       - name: Unpack site
         run: |
           mkdir -p _site
-          base64 -d site.txz.b64 > site.txz
-          tar xJf site.txz -C _site
+          tar xJf site.txz.b64 -C _site
+          touch _site/.nojekyll
           ls -R _site
       - uses: actions/configure-pages@v5
+        with:
+          enablement: true
       - uses: actions/upload-pages-artifact@v3
         with:
           path: _site
